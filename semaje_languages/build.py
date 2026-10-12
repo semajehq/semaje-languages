@@ -1,4 +1,4 @@
-"""Regenerate packages/languages/languages.json (+ tts-voices.json).
+"""Regenerate semaje_languages/languages.json (+ tts-voices.json).
 
 Sources, all authoritative upstream lists:
   * Whisper           faster_whisper.tokenizer._LANGUAGE_CODES (+ names below)
@@ -6,10 +6,9 @@ Sources, all authoritative upstream lists:
   * MMS-TTS           https://dl.fbaipublicfiles.com/mms/tts/all-tts-languages.html
   * Piper             https://huggingface.co/rhasspy/piper-voices voices.json + MODEL_CARDs
 
-Needs network plus `pip install langcodes language_data omnilingual-asr faster-whisper`.
-Run from the repo root:
+Needs network plus the build extra: `pip install -e ".[build]"`. Run:
 
-    python -m packages.languages.build
+    python -m semaje_languages.build
 
 The output is deterministic for a given set of upstream lists (sorted, no timestamps).
 """
@@ -303,7 +302,7 @@ def main() -> None:
 
     out = {
         "version": 1,
-        "generatedBy": "python -m packages.languages.build",
+        "generatedBy": "python -m semaje_languages.build",
         "sources": {
             "whisper": len(whisper), "omnilingual": len(omni), "mmsTts": len(mms), "piperVoices": len(piper),
         },
@@ -312,7 +311,7 @@ def main() -> None:
     }
     (HERE / "languages.json").write_text(json.dumps(out, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     (HERE / "tts-voices.json").write_text(json.dumps({
-        "version": 1, "generatedBy": "python -m packages.languages.build", "piper": piper,
+        "version": 1, "generatedBy": "python -m semaje_languages.build", "piper": piper,
     }, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     print(f"languages={len(rows)} whisper={len(whisper)} omnilingual={len(omni)} "
           f"mms={len(mms)} piper={len(piper)}")

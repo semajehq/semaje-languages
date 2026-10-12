@@ -4,7 +4,7 @@ from collections import Counter
 
 import pytest
 
-from packages.languages import REGISTRY_PATH, Language, UnknownLanguage, registry
+from semaje_languages import REGISTRY_PATH, Language, UnknownLanguage, registry
 
 R = registry()
 DATA = json.loads(REGISTRY_PATH.read_text(encoding="utf-8"))

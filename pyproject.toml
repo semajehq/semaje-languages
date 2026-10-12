@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "semaje-languages"
+version = "1.0.0"
+description = "Language registry for semaje: 1,693 languages, one canonical code per language, every alias resolved."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+# Only needed to regenerate the JSON from upstream sources.
+build = ["langcodes>=3.4", "language_data>=1.2", "faster-whisper==1.1.1", "omnilingual-asr==0.2.0", "torchaudio==2.8.0", "pyarrow<21"]
+
+[project.urls]
+Source = "https://github.com/semajehq/semaje-languages"
+
+[tool.setuptools]
+packages = ["semaje_languages"]
+
+[tool.setuptools.package-data]
+semaje_languages = ["*.json"]

@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generatedBy": "python -m packages.languages.build",
+ "generatedBy": "python -m semaje_languages.build",
  "sources": {
   "whisper": 100,
   "omnilingual": 1672,

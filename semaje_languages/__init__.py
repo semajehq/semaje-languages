@@ -17,7 +17,10 @@ from dataclasses import dataclass, asdict
 from functools import lru_cache
 from pathlib import Path
 
+__version__ = "1.0.0"
+
 REGISTRY_PATH = Path(__file__).resolve().parent / "languages.json"
+PIPER_CATALOG_PATH = Path(__file__).resolve().parent / "tts-voices.json"
 
 
 # Regions that imply a non-default script (zh-TW → Traditional Chinese).
@@ -135,4 +138,11 @@ def registry() -> Registry:
     return Registry([Language.from_row(row) for row in data["languages"]])
 
 
-__all__ = ["Language", "Registry", "UnknownLanguage", "registry", "fold"]
+@lru_cache(maxsize=1)
+def piper_catalog() -> list[dict]:
+    """Piper voice catalog (with per-voice dataset licenses), generated alongside the registry."""
+    return json.loads(PIPER_CATALOG_PATH.read_text(encoding="utf-8"))["piper"]
+
+
+__all__ = ["Language", "Registry", "UnknownLanguage", "registry", "piper_catalog", "fold",
+           "REGISTRY_PATH", "PIPER_CATALOG_PATH", "__version__"]
